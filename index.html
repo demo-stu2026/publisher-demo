@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>物联网数据可视化</title>
+</head>
+<body>
+    <h2>传感器数据可视化</h2>
+    <p>温度：<span id="temp">--</span> ℃</p >
+    <p>湿度：<span id="hum">--</span> %RH</p >
+    <p>更新时间：<span id="time">--</span></p >
+
+    <script>
+        function getData(){
+            fetch("/data")
+            .then(res=>res.json())
+            .then(d=>{
+                document.getElementById('temp').innerText = d.temp
+                document.getElementById('hum').innerText = d.hum
+                document.getElementById('time').innerText = d.time
+            })
+        }
+        getData()
+        setInterval(getData,2000)
+    </script>
+</body>
+</html>
